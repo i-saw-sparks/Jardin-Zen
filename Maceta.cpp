@@ -33,7 +33,7 @@ void Maceta::dibujarMini(){ //Maceta en menu
 void Maceta::dibPlantaMini(){ //Planta en menu
   int triy=0, trix=0, rectx=0, recty=0;
 
-  tft.fillRect(18,30,30,20,ST77XX_WHITE);
+  tft.fillRect(x+18,y+30,30,20,ST77XX_WHITE);
   switch(estado){
     case 0:
     break;
@@ -176,14 +176,28 @@ void Maceta::dibPlantaMax(){
 void Maceta::dibujarFruta(){
   switch(semilla){
     case 1:
-      tft.fillCircle(81, 52, 4, ST77XX_ORANGE);
+      tft.fillCircle(81, 50, 5, ST77XX_ORANGE);
+      tft.fillRect(83,46,5,3,ST77XX_GREEN);
       break;
     case 2:
-      tft.fillCircle(81, 52, 4, ST77XX_RED);
+      tft.fillCircle(81, 50, 5, ST77XX_RED);
+      tft.fillRect(83,46,5,3,ST77XX_GREEN);
+      
       break;
     case 3:
        tft.fillTriangle(77,48,81,54,84,48,ST77XX_RED); 
        break;
+    case 4:
+       tft.fillCircle(78,51,2,0x800080);
+       tft.fillCircle(84,51,2,0x800080);
+       tft.fillCircle(81,55,2,0x800080);
+       break;
+    case 5:
+        tft.fillCircle(81, 52, 4, ST77XX_RED);
+      break;   
+    case 6:
+        tft.fillCircle(81, 52, 4, ST77XX_ORANGE);
+      break;
   }
 }
 

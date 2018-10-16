@@ -48,14 +48,14 @@ void loop() {
     if(!vistaGeneral){
       dibujarMenu();
       vistaGeneral=TRUE;
-      stt1=0;
-      stt2=0;
-      stt3=0;
-      stt4=0;
-      stt1x=0;
-      stt2x=0;
-      stt3x=0;
-      stt4x=0;
+      stt1=5;
+      stt2=5;
+      stt3=5;
+      stt4=5;
+      stt1x=5;
+      stt2x=5;
+      stt3x=5;
+      stt4x=5;
     }
     dibujarPlantas();
     switch (opcion){
@@ -160,7 +160,7 @@ void loop() {
         regar = Teclado.getKey();
         aumento = regar - 48;
         maceta3.sem_atributos_avance(aumento);
-        if(stt1x!=maceta3.estado){
+        if(stt3x!=maceta3.estado){
          stt3x=maceta3.estado; 
          maceta3.dibPlantaMax();
         }
