@@ -25,6 +25,7 @@ char opcion='0';
 char regar='0', ctrl='0';
 int aumento = 0;
 int stt1=0, stt2=0, stt3=0, stt4=0;
+int stt1x=0, stt2x=0, stt3x=0, stt4x=0;
 bool vistaGeneral=FALSE;
 Maceta maceta1(1), maceta2(2), maceta3(3), maceta4(4);
 
@@ -51,6 +52,10 @@ void loop() {
       stt2=0;
       stt3=0;
       stt4=0;
+      stt1x=0;
+      stt2x=0;
+      stt3x=0;
+      stt4x=0;
     }
     dibujarPlantas();
     switch (opcion){
@@ -97,7 +102,10 @@ void loop() {
         regar = Teclado.getKey();
         aumento = regar - 48;
         maceta1.sem_atributos_avance(aumento);
-        maceta1.dibPlantaMax();
+        if(stt1x!=maceta1.estado){
+         stt1x=maceta1.estado; 
+         maceta1.dibPlantaMax();
+        }
       }while(regar != '#'&&ctrl!='#');
     
       maceta1.vista = TRUE;
@@ -123,7 +131,10 @@ void loop() {
         regar = Teclado.getKey();
         aumento = regar - 48;
         maceta2.sem_atributos_avance(aumento);
-        maceta2.dibPlantaMax();
+        if(stt2x!=maceta2.estado){
+         stt2x=maceta2.estado; 
+         maceta2.dibPlantaMax();
+        }
       }while(regar != '#'&&ctrl!='#');
     
       maceta2.vista = TRUE;
@@ -149,7 +160,10 @@ void loop() {
         regar = Teclado.getKey();
         aumento = regar - 48;
         maceta3.sem_atributos_avance(aumento);
-        maceta3.dibPlantaMax();
+        if(stt1x!=maceta3.estado){
+         stt3x=maceta3.estado; 
+         maceta3.dibPlantaMax();
+        }
       }while(regar != '#'&&ctrl!='#');
     
       maceta3.vista = TRUE;
@@ -175,7 +189,10 @@ void loop() {
         regar = Teclado.getKey();
         aumento = regar - 48;
         maceta4.sem_atributos_avance(aumento);
-        maceta4.dibPlantaMax();
+        if(stt4x!=maceta4.estado){
+         stt4x=maceta4.estado; 
+         maceta4.dibPlantaMax();
+        }
       }while(regar != '#'&&ctrl!='#');
     
       maceta4.vista = TRUE;

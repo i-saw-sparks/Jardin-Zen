@@ -112,7 +112,7 @@ void Maceta::dibujarMax(){
 
 void Maceta::dibPlantaMax(){
   int trix=0, triy=0;
-  
+  tft.fillRect(34,35,60,35,ST77XX_WHITE);
   switch(estado){
     case 0:
       
@@ -122,7 +122,7 @@ void Maceta::dibPlantaMax(){
       trix=34;
       triy=70;
       for(int i=0;i<9;i++){
-        tft.fillTriangle(trix,triy,trix+5,triy-8,trix+10,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+5,triy-8,trix+10,triy-1,ST77XX_GREEN);
         trix+=6;
       }
     break;
@@ -131,7 +131,7 @@ void Maceta::dibPlantaMax(){
       trix=34;
       triy=70;
       for(int i=0;i<9;i++){
-        tft.fillTriangle(trix,triy,trix+5,triy-8,trix+10,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+5,triy-8,trix+10,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       tft.fillRect(60,50,8,18,ST77XX_GREEN);
@@ -142,7 +142,7 @@ void Maceta::dibPlantaMax(){
       trix=34;
       triy=70;
       for(int i=0;i<9;i++){
-        tft.fillTriangle(trix,triy,trix+5,triy-8,trix+10,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+5,triy-8,trix+10,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       tft.fillRect(60,50,8,18,ST77XX_GREEN);
@@ -158,7 +158,7 @@ void Maceta::dibPlantaMax(){
       trix=34;
       triy=70;
       for(int i=0;i<9;i++){
-        tft.fillTriangle(trix,triy,trix+5,triy-8,trix+10,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+5,triy-8,trix+10,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       tft.fillRect(60,50,8,18,ST77XX_GREEN);
