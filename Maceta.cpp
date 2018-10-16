@@ -33,7 +33,7 @@ void Maceta::dibujarMini(){ //Maceta en menu
 void Maceta::dibPlantaMini(){ //Planta en menu
   int triy=0, trix=0, rectx=0, recty=0;
 
-
+  tft.fillRect(18,30,30,20,ST77XX_WHITE);
   switch(estado){
     case 0:
     break;
@@ -42,7 +42,7 @@ void Maceta::dibPlantaMini(){ //Planta en menu
       trix=x+18;
       triy=y+50;
       for(int i=0;i<4;i++){
-        tft.fillTriangle(trix,triy,trix+3,triy-5,trix+7,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+3,triy-5,trix+7,triy-1,ST77XX_GREEN);
         trix+=6;
       }
     break;
@@ -54,7 +54,7 @@ void Maceta::dibPlantaMini(){ //Planta en menu
       trix=x+18;
       triy=y+50;
       for(int i=0;i<4;i++){
-        tft.fillTriangle(trix,triy,trix+3,triy-5,trix+7,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+3,triy-5,trix+7,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       trix=rectx;
@@ -69,7 +69,7 @@ void Maceta::dibPlantaMini(){ //Planta en menu
       trix=x+18;
       triy=y+50;
       for(int i=0;i<4;i++){
-        tft.fillTriangle(trix,triy,trix+3,triy-5,trix+7,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+3,triy-5,trix+7,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       trix=rectx;
@@ -87,7 +87,7 @@ void Maceta::dibPlantaMini(){ //Planta en menu
       trix=x+18;
       triy=y+50;
       for(int i=0;i<4;i++){
-        tft.fillTriangle(trix,triy,trix+3,triy-5,trix+7,triy,ST77XX_GREEN);
+        tft.fillTriangle(trix,triy-1,trix+3,triy-5,trix+7,triy-1,ST77XX_GREEN);
         trix+=6;
       }
       trix=rectx;
@@ -112,6 +112,7 @@ void Maceta::dibujarMax(){
 
 void Maceta::dibPlantaMax(){
   int trix=0, triy=0;
+  
   switch(estado){
     case 0:
       
@@ -298,9 +299,10 @@ void Maceta::sem_init(){
     estado = 1;
 }
 void Maceta::sem_estado_avance(){
-    if((agua >= a_aceptable) && (sol >= s_aceptable ) && estado<=4){
+    if((agua >= a_aceptable) && (sol >= s_aceptable )){
         if(cont >= 2){
-            estado++;
+            if(estado<=4)
+              estado++;
             cont = 0;
         }else{
             cont ++;
@@ -315,6 +317,7 @@ void Maceta::sem_estado_retroceso(){
     if(ctrl_critico){
         if(cont2 >= 4){
             estado --;
+            
         }else{
             cont2++;
         }
