@@ -42,8 +42,8 @@ class Maceta{
         void sem_estado_retroceso();
         void sem_atributos_avance(int entrada);
         void sem_atributos_retroceso();
-        void dibujarBarras(); //relacion a agua y sol como 100
-
+        void dibujarBarraS(); 
+        void dibujarBarraA();
 };
 
 

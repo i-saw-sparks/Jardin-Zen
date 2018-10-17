@@ -198,6 +198,18 @@ void Maceta::dibujarFruta(){
     case 6:
         tft.fillCircle(81, 52, 4, ST77XX_ORANGE);
       break;
+    case 7:
+        tft.fillCircle(81, 52, 4, 0x8080);
+        break;
+    case 8:
+        tft.fillCircle(81, 51, 3, 0x0280);
+        tft.fillCircle(81, 56, 4, 0x0280);    
+      break;  
+    case 9:
+        tft.fillCircle(78,51,2,ST77XX_RED);
+        tft.fillCircle(84,51,2,ST77XX_RED);
+        tft.fillCircle(81,55,2,ST77XX_RED);
+      break;  
   }
 }
 
@@ -209,62 +221,62 @@ void Maceta::sem_init(){
 
     switch(semilla){
     case 1: //Naranja
-        a_avance = 3;
+        a_avance = 4;
         s_avance = 2;
-        a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
-        s_retroceso = 2;
+        a_aceptable = 30;
+        s_aceptable = 10;
+        a_retroceso = 1;
+        s_retroceso = 1;
 
     break;
 
     case 2: //Manzana
         a_avance = 3;
-        s_avance = 2;
+        s_avance = 4;
         a_aceptable = 20;
         s_aceptable = 30;
-        a_retroceso = 2;
+        a_retroceso = 1;
         s_retroceso = 2;
 
     break;
 
     case 3: // Fresa
         a_avance = 3;
-        s_avance = 2;
+        s_avance = 3;
         a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
-        s_retroceso = 2;
+        s_aceptable = 20;
+        a_retroceso = 1;
+        s_retroceso = 1;
 
     break;
 
     case 4: //UVAS
-        a_avance = 3;
+        a_avance = 2;
         s_avance = 2;
-        a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
-        s_retroceso = 2;
+        a_aceptable = 5;
+        s_aceptable = 5;
+        a_retroceso = 1;
+        s_retroceso = 1;
 
     break;
 
     case 5: //CEREZA
-        a_avance = 3;
-        s_avance = 2;
+        a_avance = 5;
+        s_avance = 10;
         a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
+        s_aceptable = 40;
+        a_retroceso = 1;
         s_retroceso = 2;
 
     break;
 
     case 6: //DURAZNO
-        a_avance = 3;
+        a_avance = 4;
         s_avance = 2;
-        a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
-        s_retroceso = 2;
+        a_aceptable = 30;
+        s_aceptable = 10;
+        a_retroceso = 1;
+        s_retroceso = 1;
 
     break;
 
@@ -279,11 +291,11 @@ void Maceta::sem_init(){
     break;
 
     case 8: //PERA
-        a_avance = 3;
+        a_avance = 1;
         s_avance = 2;
-        a_aceptable = 20;
-        s_aceptable = 30;
-        a_retroceso = 2;
+        a_aceptable = 0;
+        s_aceptable = 40;
+        a_retroceso = 1;
         s_retroceso = 2;
 
     break;
@@ -314,8 +326,8 @@ void Maceta::sem_init(){
 }
 void Maceta::sem_estado_avance(){
     if((agua >= a_aceptable) && (sol >= s_aceptable )){
-        if(cont >= 2){
-            if(estado<=4)
+        if(cont >= 5){
+            if(estado<4)
               estado++;
             cont = 0;
         }else{
@@ -329,14 +341,10 @@ void Maceta::sem_estado_avance(){
 
 void Maceta::sem_estado_retroceso(){
     if(ctrl_critico){
-        if(cont2 >= 4){
+        if(estado>0){
             estado --;
             
-        }else{
-            cont2++;
         }
-    }else{
-        cont2 = 0;
     }
 }
 
@@ -344,23 +352,28 @@ void Maceta::sem_estado_retroceso(){
 
 void Maceta::sem_atributos_avance(int entrada){
     if(!vista){
-
-        if(entrada == 1){
+        if(entrada == 2 && agua < 100)
             agua += a_avance;
-        }
 
-        if(entrada == 2){
+        if(entrada == 1 && sol < 100)
             sol += s_avance;
-        }
+        
     }
 }
+
 void Maceta::sem_atributos_retroceso(){
     agua -= a_retroceso;
     sol -= s_retroceso;
 }
-void Maceta::dibujarBarras(){
-    if(!vista){
 
+void Maceta::dibujarBarraA(){
+      tft.fillRect(13+a_aceptable,155,2,3,ST77XX_RED);
+      tft.fillRect(14, 150, 105, 5, ST77XX_WHITE);
+      tft.fillRect(14, 150, agua, 5, ST77XX_BLUE);
+} 
 
-    }
-} //relacion a agua y sol como 100
+void Maceta::dibujarBarraS(){
+  tft.fillRect(13+s_aceptable,142,2,3,ST77XX_RED);
+  tft.fillRect(14, 145, 105, 5, ST77XX_WHITE);
+  tft.fillRect(14, 145, sol, 5, ST77XX_YELLOW);
+}

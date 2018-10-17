@@ -16,13 +16,13 @@ char hexaKeys[4][4]=
 byte rowPins[4] = {22, 24, 26, 28};
 byte colPins[4] = {30, 32, 34, 36};
 
-int points = 0, aumento = 0;
+int points = 0, aumento = 0, solt=0, aguat=0;
 int stt[4]= {0, 0, 0, 0};
 int sttx[4]= {0, 0, 0, 0};
 
 char regar='0', ctrl='0', opcion='0';
 
-bool vistaGeneral=FALSE;
+bool vistaGeneral=FALSE, ctrlp=FALSE;
 
 Keypad Teclado = Keypad(makeKeymap(hexaKeys), rowPins, colPins, 4, 4);
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
@@ -34,7 +34,7 @@ void dibujarMenu();
 
 void setup() { 
   TimerOne Timer1;
-  Timer1.initialize(1000000);
+  Timer1.initialize(2000000);
   Timer1.attachInterrupt(Check_up);
   interrupts();  
   tft.initR(INITR_BLACKTAB);
@@ -42,7 +42,11 @@ void setup() {
 }
 
 void loop() {
-  
+    tft.setCursor(1,1);
+    tft.setTextColor(ST77XX_BLACK);
+    tft.setTextSize(1);
+    tft.print("score: ");
+    tft.print(points);
   opcion=Teclado.getKey();
     
   if(maceta[0].vista && maceta[1].vista && maceta[2].vista && maceta[3].vista){ //significa que estamos en MENU
@@ -55,6 +59,7 @@ void loop() {
         sttx[i]=5;
       }
     }
+    
     dibujarPlantas();
     
     switch (opcion){
@@ -97,6 +102,7 @@ void loop() {
       maceta[i].sem_init();
     }
       do{
+        ctrlp=FALSE;
         regar = 0;
         regar = Teclado.getKey();
         aumento = regar - 48;
@@ -105,7 +111,22 @@ void loop() {
          sttx[i]=maceta[i].estado; 
          maceta[i].dibPlantaMax();
         }
-      }while(regar != '#'&&ctrl!='#');
+        if(solt!=maceta[i].sol){
+          solt=maceta[i].sol;
+          maceta[i].dibujarBarraS();
+        }
+        if(aguat!=maceta[i].agua){
+          aguat=maceta[i].agua;
+          maceta[i].dibujarBarraA();
+        }
+        if(maceta[i].estado==4){
+          if(aumento==3){
+            points++;
+            ctrlp=TRUE;
+            maceta[i].estado=0;
+          }
+        }
+      }while(regar != '#'&&ctrl!='#'&&maceta[i].estado!=0&&!ctrlp);
     
       maceta[i].vista = TRUE;
     }   
