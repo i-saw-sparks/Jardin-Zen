@@ -31,10 +31,12 @@ Maceta maceta[4]={1,2,3,4};
 void dibujarPlantas();
 void Check_up();
 void dibujarMenu();
+void dibujarMenuS();
+void borrarMenuS();
 
 void setup() { 
   TimerOne Timer1;
-  Timer1.initialize(2000000);
+  Timer1.initialize(3000000);
   Timer1.attachInterrupt(Check_up);
   interrupts();  
   tft.initR(INITR_BLACKTAB);
@@ -96,8 +98,9 @@ void loop() {
       do{
         ctrl=Teclado.getKey();
         maceta[i].semilla = ctrl - 48;
+        dibujarMenuS();
       }while(!(maceta[i].semilla > 0 && maceta[i].semilla < 10)&&ctrl!='#');
-
+        borrarMenuS();
     if(ctrl!='#')     
       maceta[i].sem_init();
     }
@@ -156,4 +159,54 @@ void dibujarPlantas(){
         maceta[i].dibPlantaMini();
       }
     }
+}
+
+void dibujarMenuS(){
+    
+    tft.setTextColor(ST77XX_BLACK);
+    tft.setTextSize(1);
+    for(int c=0; c<2; c++){
+      for(int i=10; i<=40; i+=10){
+          if(c==0){
+          tft.setCursor(5,i);
+          switch(i){
+          case 10:
+            tft.print("1-Naranja ");       
+            break;
+          case 20:
+            tft.print("2-Manzana ");
+            break;
+          case 30:
+            tft.print("3-Fresa");
+            break;
+          case 40:
+            tft.print("4-Uvas");
+            break;      
+          }
+        }
+          if(c==1){
+          tft.setCursor(65,i);
+          switch(i){
+          case 10:
+            tft.print("5-Cereza ");       
+            break;
+          case 20:
+            tft.print("6-Durazno");
+            break;
+          case 30:
+            tft.print("7-Kiwi");
+            break;
+          case 40:
+            tft.print("8-Pera");
+            break;      
+          }
+        }
+    }
+    tft.setCursor(25,50);
+    tft.print("9-Frambuesa");
+}
+}
+
+void borrarMenuS(){
+  tft.fillRect(5,10,123,50,ST77XX_WHITE);
 }
